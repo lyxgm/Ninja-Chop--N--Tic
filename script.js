@@ -12,11 +12,18 @@ const winPatterns = [
     [0, 4, 8], [2, 4, 6] // diagonals
 ];
 
+const highlightWinningBoxes = (pattern) => {
+    pattern.forEach(index => {
+        boxes[index].classList.add('winning-box'); // Add the class to highlight the winning boxes
+    });
+};
+
 const checkWinner = () => {
     for (const pattern of winPatterns) {
         const [a, b, c] = pattern;
         if (boxes[a].textContent && boxes[a].textContent === boxes[b].textContent && boxes[a].textContent === boxes[c].textContent) {
             gameActive = false;
+            highlightWinningBoxes(pattern); // Highlight the winning boxes
             return boxes[a].textContent;
         }
     }
@@ -44,7 +51,10 @@ const handleClick = (event) => {
 };
 
 const resetGame = () => {
-    boxes.forEach(box => box.textContent = '');
+    boxes.forEach(box => {
+        box.textContent = '';
+        box.classList.remove('winning-box'); // Remove the winning highlight
+    });
     message.textContent = '';
     currentPlayer = 'X';
     gameActive = true;

@@ -1,100 +1,163 @@
+@font-face {
+    font-family: 'Finger Paint';
+    src: url('/source/FingerPaint-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Tokyo';
+    src: url('source/go3v2.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family: 'Finger Paint', cursive;
+    font-family: 'Finger Paint', cursive; /* Default font for most elements */
+}
+
+:root {
+    --orange: #F2C14E;
+    --winning-blocks: #2d414b;
+    --box-bg: #f8c6b5; /* Light fruit-inspired color */
+    --box-hover-bg: #ff8c00; /* Lively fruit color on hover */
+    --winning-box-color: #e64f30; /* Color for winning combination */
 }
 
 body {
-    color: white;
-    background-color: #2b2726;
+    color: var(--orange);
+    background-color: #12181B;
     height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.container {
-    text-align: center;
+    background-image: url('source/1.png');
+    background-size: cover; /* Adjust background size */
 }
 
 h1 {
-    font-size: 54px;
+    font-family: 'Tokyo', cursive;
+    font-size: 80px;
     text-transform: uppercase;
-    margin-bottom: 20px;
+    text-align: center;
     color: white;
+    margin-top: 10%;
+    font-weight: 700; /* Slightly thicker font */
+    text-shadow: 2px 2px 0 black, -2px -2px 0 black, 2px -2px 0 black, -2px 2px 0 black; /* Thicker black border effect */
+    letter-spacing: 3px; /* Adjust letter spacing here */
+}
+
+.container {
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 #gameboard {
-    width: 300px;
+    width: 330px;
+    height: 330px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 2px;
-    margin: 0 auto;
-    border: 2px solid white;
+    grid-template-rows: repeat(3, 1fr);
+    gap: 7px; /* Space between boxes */
+    border: 8px solid var(--orange); /* Border around the gameboard */
+    background: rgba(255, 255, 255, 0.3); /* Semi-transparent background */
+    border-radius: 15px; /* Rounded corners for a modern look */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Shadow for 3D effect */
+    margin-top: 20px; /* Adjust this value to increase space */
 }
 
 .box {
     height: 100px;
+    width: 100px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
-    font-size: 80px;
-    cursor: pointer;
-    border: 2px solid white;
-    transition: background-color 0.3s;
-}
-
-.box:nth-child(3n) {
-    border-right: none;
-}
-
-.box:nth-child(6) ~ .box {
-    border-bottom: none;
+    color: var(--orange);
+    font-size: 120px;
+    background: var(--box-bg); /* Fruit-inspired box background */
+    border: 2px solid var(--orange); /* Border color */
+    border-radius: 10px; /* Rounded corners for boxes */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition */
 }
 
 .box:hover {
-    background-color: #444;
+    background: var(--box-hover-bg); /* Lively background on hover */
+    transform: scale(1.05); /* Slightly enlarge on hover */
 }
 
-#message {
-    font-size: 25px;
-    margin: 20px 0;
+.winning-box {
+    background-color: var(--winning-box-color); /* Highlight winning boxes */
+    color: white; /* Change text color for better contrast */
+    transform: scale(1.1); /* Slightly enlarge winning boxes */
+    transition: background-color 0.5s ease, transform 0.5s ease; /* Smooth transition for winning boxes */
 }
 
 .display {
     color: white;
+    font-size: 25px;
+    text-align: center;
+    margin-top: 1em;
+    margin-bottom: 1em;
 }
 
-.display.winner {
-    color: #e64f30; /* Red for winner */
-}
-
-.display.draw {
-    color: #f39845; /* Orange for draw */
+.hide {
+    display: none;
 }
 
 .controls {
-    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1em;
 }
 
 button {
     padding: 10px 20px;
     border-radius: 10px;
-    background-color: #e64f30;
-    color: white;
+    background-color: var(--orange);
+    color: #333;
     border: none;
     font-size: 18px;
+    transition: 200ms transform;
     font-weight: 600;
     cursor: pointer;
-    transition: transform 0.2s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for button */
 }
 
 button:hover {
     transform: translateY(-2px);
 }
 
-button:focus {
-    outline: none;
+#reset {
+    background-color: #e64f30;
+    color: white;
 }
+
+
+
+
+.footer {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    color: white;
+    font-size: 14px;
+    font-family: 'Nunito', sans-serif; /* Sans-serif for "Inspired by" */
+    opacity: 0.7; /* Slight transparency */
+}
+
+.footer a {
+    font-family: 'Tokyo', cursive; /* Tokyo font for "Fruit Ninja" */
+    color: white;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+    opacity: 1;
+}
+
