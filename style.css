@@ -1,0 +1,100 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Finger Paint', cursive;
+}
+
+body {
+    color: white;
+    background-color: #2b2726;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    text-align: center;
+}
+
+h1 {
+    font-size: 54px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    color: white;
+}
+
+#gameboard {
+    width: 300px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin: 0 auto;
+    border: 2px solid white;
+}
+
+.box {
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 80px;
+    cursor: pointer;
+    border: 2px solid white;
+    transition: background-color 0.3s;
+}
+
+.box:nth-child(3n) {
+    border-right: none;
+}
+
+.box:nth-child(6) ~ .box {
+    border-bottom: none;
+}
+
+.box:hover {
+    background-color: #444;
+}
+
+#message {
+    font-size: 25px;
+    margin: 20px 0;
+}
+
+.display {
+    color: white;
+}
+
+.display.winner {
+    color: #e64f30; /* Red for winner */
+}
+
+.display.draw {
+    color: #f39845; /* Orange for draw */
+}
+
+.controls {
+    margin-top: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    border-radius: 10px;
+    background-color: #e64f30;
+    color: white;
+    border: none;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+button:hover {
+    transform: translateY(-2px);
+}
+
+button:focus {
+    outline: none;
+}
