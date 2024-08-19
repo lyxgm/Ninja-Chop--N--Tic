@@ -62,3 +62,46 @@ const resetGame = () => {
 
 board.addEventListener('click', handleClick);
 resetButton.addEventListener('click', resetGame);
+
+
+// CURSOR DESIGN SLASH
+// document.addEventListener('mousemove', function(e) {
+//     const slash = document.createElement('div');
+//     slash.className = 'slash';
+
+//     // Position the slash based on mouse coordinates
+//     slash.style.left = `${e.pageX - 120}px`;  // Move the stroke to the left of the cursor
+//     slash.style.top = `${e.pageY + 5}px`;     // Position just below the cursor
+
+//     // Add the slash to the document
+//     document.body.appendChild(slash);
+
+//     // Animate the slash out
+//     setTimeout(() => {
+//         slash.style.transform = 'rotate(-45deg) scale(1.5)';
+//         slash.style.opacity = '0';
+//     }, 50);
+
+//     // Remove the slash element after the animation
+//     setTimeout(() => {
+//         document.body.removeChild(slash);
+//     }, 500);  // Match the transition duration
+// });
+
+
+
+
+
+
+
+document.addEventListener('mousemove', (e) => {
+    const ripple = document.createElement('div');
+    ripple.classList.add('ripple');
+    ripple.style.left = `${e.clientX}px`;
+    ripple.style.top = `${e.clientY}px`;
+    document.body.appendChild(ripple);
+
+    ripple.addEventListener('animationend', () => {
+        ripple.remove();
+    });
+});
