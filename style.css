@@ -81,6 +81,8 @@ h1 {
     border: 2px solid var(--orange); /* Border color */
     border-radius: 10px; /* Rounded corners for boxes */
     transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition */
+    text-shadow: 2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000;
+
 }
 
 .box:hover {

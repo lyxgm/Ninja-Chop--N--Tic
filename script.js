@@ -3,6 +3,12 @@ const boxes = Array.from(document.getElementsByClassName('box'));
 const message = document.getElementById('message');
 const resetButton = document.getElementById('reset');
 
+// Sound Effects
+const playSound = (sound) => {
+    const audio = new Audio(`source/${sound}.mp3`);
+    audio.play();
+};
+
 let currentPlayer = 'X';
 let gameActive = true;
 
@@ -40,11 +46,18 @@ const handleClick = (event) => {
 
     if (box.textContent || !gameActive) return;
 
+    playSound('click-sound'); // Play click sound
     box.textContent = currentPlayer;
     const winner = checkWinner();
 
     if (winner) {
-        displayMessage(winner === 'Draw' ? "It's a Draw!" : `${winner} Wins!`, winner === 'Draw' ? 'draw' : 'winner');
+        if (winner === 'Draw') {
+            playSound('draw-sound'); // Play draw sound
+            displayMessage("It's a Draw!", 'draw');
+        } else {
+            playSound('win-sound'); // Play win sound
+            displayMessage(`${winner} Wins!`, 'winner');
+        }
     } else {
         currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
     }
@@ -58,42 +71,13 @@ const resetGame = () => {
     message.textContent = '';
     currentPlayer = 'X';
     gameActive = true;
+    playSound('reset-sound'); // Play reset sound
 };
 
 board.addEventListener('click', handleClick);
 resetButton.addEventListener('click', resetGame);
 
-
-// CURSOR DESIGN SLASH
-// document.addEventListener('mousemove', function(e) {
-//     const slash = document.createElement('div');
-//     slash.className = 'slash';
-
-//     // Position the slash based on mouse coordinates
-//     slash.style.left = `${e.pageX - 120}px`;  // Move the stroke to the left of the cursor
-//     slash.style.top = `${e.pageY + 5}px`;     // Position just below the cursor
-
-//     // Add the slash to the document
-//     document.body.appendChild(slash);
-
-//     // Animate the slash out
-//     setTimeout(() => {
-//         slash.style.transform = 'rotate(-45deg) scale(1.5)';
-//         slash.style.opacity = '0';
-//     }, 50);
-
-//     // Remove the slash element after the animation
-//     setTimeout(() => {
-//         document.body.removeChild(slash);
-//     }, 500);  // Match the transition duration
-// });
-
-
-
-
-
-
-
+// Cursor Design Ripple Effect
 document.addEventListener('mousemove', (e) => {
     const ripple = document.createElement('div');
     ripple.classList.add('ripple');
@@ -105,3 +89,21 @@ document.addEventListener('mousemove', (e) => {
         ripple.remove();
     });
 });
+
+const helpSection = document.getElementById('help-section');
+const closeHelpButton = document.getElementById('close-help-button');
+const showHelpButton = document.getElementById('show-help-button');
+
+// Function to show the help section
+const showHelpSection = () => {
+    helpSection.classList.remove('hidden');
+};
+
+// Function to hide the help section
+const hideHelpSection = () => {
+    helpSection.classList.add('hidden');
+};
+
+// Event listeners for help buttons
+showHelpButton.addEventListener('click', showHelpSection);
+closeHelpButton.addEventListener('click', hideHelpSection);
